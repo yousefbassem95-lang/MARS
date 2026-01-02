@@ -54,7 +54,9 @@ You are an elite red team operator. Think like a hacker. Be creative and thoroug
             "api_key": None,
             "ollama_model": "llama3",
             "temperature": 0.7,
-            "max_tokens": 4096
+            "max_tokens": 4096,
+            "logging": True,
+            "stealth_mode": False
         }
     
     def _save_config(self):
@@ -91,6 +93,18 @@ You are an elite red team operator. Think like a hacker. Be creative and thoroug
         """Set API key."""
         self.config["api_key"] = api_key
         self._save_config()
+
+    def toggle_logging(self):
+        """Toggle logging state."""
+        self.config["logging"] = not self.config.get("logging", True)
+        self._save_config()
+        return self.config["logging"]
+
+    def toggle_stealth(self):
+        """Toggle stealth mode."""
+        self.config["stealth_mode"] = not self.config.get("stealth_mode", False)
+        self._save_config()
+        return self.config["stealth_mode"]
     
     def setup_interactive(self):
         """Interactive setup for AI configuration."""

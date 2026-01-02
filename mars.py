@@ -128,6 +128,9 @@ def show_main_menu():
 [cyan][7][/cyan] ⚙️  [white]Settings[/white]
     └── Configure AI models and preferences
 
+[bold red][99][/bold red] 💥 [white]Self-Destruct[/white]
+    └── Emergency cleanup and exit
+
 [cyan][0][/cyan] 🚪 [white]Exit[/white]
 """
     console.print(Panel(menu, border_style="red"))
@@ -313,8 +316,8 @@ def settings_mode():
     table.add_row("1", "AI Model", ai.get_model_name() or "Not configured")
     table.add_row("2", "API Key", "••••••••" if ai.has_api_key() else "Not set")
     table.add_row("3", "Local Model", ai.get_local_model() or "None")
-    table.add_row("4", "Safety Mode", "Enabled")
-    table.add_row("5", "Logging", "Enabled")
+    table.add_row("4", "Stealth Mode", "Enabled" if ai.config.get("stealth_mode") else "Disabled")
+    table.add_row("5", "Logging", "Enabled" if ai.config.get("logging") else "Disabled")
     
     console.print(table)
     
@@ -326,10 +329,26 @@ def settings_mode():
         api_key = Prompt.ask("[cyan]Enter API Key[/cyan]", password=True)
         ai.set_api_key(api_key)
         console.print("[green]✓ API Key saved[/green]")
+    elif choice == "4":
+        state = ai.toggle_stealth()
+        console.print(f"[green]✓ Stealth Mode {'Enabled' if state else 'Disabled'}[/green]")
+    elif choice == "5":
+        state = ai.toggle_logging()
+        console.print(f"[green]✓ Logging {'Enabled' if state else 'Disabled'}[/green]")
     elif choice == "back":
         return
 
 def main():
+    # Initialize Stealth Shield
+    try:
+        from core.stealth import StealthShield
+        shield = StealthShield()
+        if not shield.activate():
+            console.print("[bold red]⚠️  ALERT: Debugger Detected! Initiating evasion protocols...[/bold red]")
+            # In a real scenario, we might exit here
+    except ImportError:
+        pass
+
     parser = argparse.ArgumentParser(description="MARS - AI-Powered Red Team Automation")
     parser.add_argument("--target", "-t", help="Target domain/IP")
     parser.add_argument("--mode", "-m", choices=["recon", "vuln", "exploit", "mitre", "chat", "report"],
@@ -348,43 +367,67 @@ def main():
     if not args.no_warning:
         show_legal_warning()
     
-    # Command-line mode
-    if args.mode:
-        if args.mode == "chat":
-            ai_chat_mode()
-        elif args.mode == "recon":
-            if not args.target:
-                console.print("[red]Error: --target required for recon mode[/red]")
-                sys.exit(1)
-            from modules.osint.ai_recon import AIRecon
-            recon = AIRecon()
-            recon.analyze(args.target)
-        # Add other modes...
-        return
-    
-    # Interactive mode
-    while True:
-        show_main_menu()
+    try:
+        # Command-line mode
+        if args.mode:
+            if args.mode == "chat":
+                ai_chat_mode()
+            elif args.mode == "recon":
+                if not args.target:
+                    console.print("[red]Error: --target required for recon mode[/red]")
+                    sys.exit(1)
+                from modules.osint.ai_recon import AIRecon
+                recon = AIRecon()
+                recon.analyze(args.target)
+            elif args.mode == "vuln":
+                if not args.target:
+                    console.print("[red]Error: --target required for vuln mode[/red]")
+                    sys.exit(1)
+                from modules.osint.vuln_scanner import VulnScanner
+                scanner = VulnScanner()
+                scanner.scan(args.target)
+            elif args.mode == "report":
+                report_mode()
+            elif args.mode == "mitre":
+                if not args.apt or not args.target:
+                    console.print("[red]Error: --apt and --target required for mitre mode[/red]")
+                    sys.exit(1)
+                mitre_mode() # Note: mitre_mode currently implements interactive selection, needs refactor for CLI args support if strictly following args
+                # For now let's just enter interactive mitre mode 
+            return
         
-        choice = Prompt.ask("[cyan]Select option[/cyan]", choices=["0", "1", "2", "3", "4", "5", "6", "7"])
-        
-        if choice == "0":
-            console.print("\n[red]Goodbye! Stay ethical. 🔴[/red]\n")
-            break
-        elif choice == "1":
-            reconnaissance_mode()
-        elif choice == "2":
-            vuln_scan_mode()
-        elif choice == "3":
-            exploit_gen_mode()
-        elif choice == "4":
-            mitre_mode()
-        elif choice == "5":
-            ai_chat_mode()
-        elif choice == "6":
-            report_mode()
-        elif choice == "7":
-            settings_mode()
+        # Interactive mode
+        while True:
+            show_main_menu()
+            
+            choice = Prompt.ask("[cyan]Select option[/cyan]", choices=["0", "1", "2", "3", "4", "5", "6", "7", "99"])
+            
+            if choice == "0":
+                console.print("\n[red]Goodbye! Stay ethical. 🔴[/red]\n")
+                break
+            elif choice == "1":
+                reconnaissance_mode()
+            elif choice == "2":
+                vuln_scan_mode()
+            elif choice == "3":
+                exploit_gen_mode()
+            elif choice == "4":
+                mitre_mode()
+            elif choice == "5":
+                ai_chat_mode()
+            elif choice == "6":
+                report_mode()
+            elif choice == "7":
+                settings_mode()
+            elif choice == "99":
+                if Confirm.ask("[bold red]ARE YOU SURE? This will delete all logs and config![/bold red]"):
+                    shield.emergency_cleanup()
 
-if __name__ == "__main__":
-    main()
+    except KeyboardInterrupt:
+        console.print("\n[yellow]Operation cancelled by user.[/yellow]")
+        sys.exit(0)
+    except Exception as e:
+        console.print(f"\n[bold red]💥 CRITICAL ERROR: {str(e)}[/bold red]")
+        console.print("[dim]MARS has encountered an anomaly but remains operational.[/dim]")
+        # Log error to encrypted log (simulated)
+
