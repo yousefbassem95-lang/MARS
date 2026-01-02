@@ -17,46 +17,22 @@ from rich.markdown import Markdown
 console = Console()
 
 ICON = """
-              #####                    ****                     #####   
-              #######                 ******                   ######             
-          ####   ##########           ******             ##########  ###          
-         #####           #######       ****        ########         #####        
-         #####                #####             #####               #####        
-           #####################  #   #####     # ######################         
-                              ###   #########   ###                            
-                       #######    ############      ######                       
-                     ##########   #############    #########                     
-                   ###########    #############    ###########                   
-                 ######       ##  ############# ##         ######                 
-               #####        #####  ###########  ####         #####               
-             ****#        *******#  #########   #******         #****             
-           ****         **+++***     ######      ***+++***        ****           
-         ***          *++++*+  ***  *+++++++*  *** ++++++**          ***         
-       **           *+++++    *+++  ++++++++   +++*    ++++++*          **       
-                  +++++       +=+    +=====+    +=+      +++++*                  
-                ++++         +=+     +=====+     +=+        ++++*                
-              ++==          +=+      +=====+      +=+          ==++              
-            ++=            ===       =----=        ===            ==+            
-                           ==        =----=         ==              =++         
-                          ==         =----=          ==                          
-                         ==          =-::-=           ==                         
-                         =            =::=             =                         
-                        =             =::=              =                        
-                       -              =..=               -                       
-                      :               :.:                 :                       
-                                      :::                                       
-                                      :::                                        
-                                      ---                                        
-                                      |||
+       .   .
+     .'     '.
+    /   o     \\
+   |     o     |
+    \\    _    /
+     '.     .'
+       '...'
 """
 
 BANNER = """
-                    ╔═══════════════════════════════════════╗
-                    ║              ♂️  M A R S              ║
-                    ║     AI-Powered Red Team Automation    ║
-                    ╚═══════════════════════════════════════╝
-    
-            🧠 Think Like a Hacker. Attack Like an AI. 🧠
+███╗   ███╗ █████╗ ██████╗ ███████╗
+████╗ ████║██╔══██╗██╔══██╗██╔════╝
+██╔████╔██║███████║██████╔╝███████╗
+██║╚██╔╝██║██╔══██║██╔══██╗╚════██║
+██║ ╚═╝ ██║██║  ██║██║  ██║███████║
+╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝
 """
 
 def show_legal_warning():
@@ -78,19 +54,21 @@ By using MARS, you agree that:
 
 Type 'I AGREE' to continue (or 'exit' to quit):
 """
-    console.print(Panel(warning, border_style="red", title="⚠️  LEGAL DISCLAIMER"))
+    console.print(Panel(warning, border_style="bold red", title="[bold red]⚠️  LEGAL DISCLAIMER[/bold red]"))
     response = input().strip()
     
     if response != "I AGREE":
-        console.print("[red]Exiting. You must agree to the terms to use MARS.[/red]")
+        console.print("[bold red]Exiting. You must agree to the terms to use MARS.[/bold red]")
         sys.exit(0)
 
 def display_banner():
     """Display MARS banner."""
-    console.print(f"[dim red]{ICON}[/dim red]")
-    console.print(f"[bold red]{BANNER}[/bold red]")
-    console.print("[bold white]made by J0J0M0J0[/bold white]")
-    console.print("[dim]AI-Powered. Ethically Designed. Devastatingly Effective.[/dim]\n")
+    # Mars Red Theme: #FF4500 (OrangeRed) to #8B0000 (DarkRed)
+    console.print(f"[bold #FF4500]{ICON}[/bold #FF4500]", justify="center")
+    console.print(f"[bold #8B0000]{BANNER}[/bold #8B0000]", justify="center")
+    console.print("\n[bold white on #8B0000] AI-POWERED RED TEAM AUTOMATION [/bold white on #8B0000]", justify="center")
+    console.print("\n[bold white]made by J0J0M0J0[/bold white]", justify="center")
+    console.print("[dim]Think Like a Hacker. Attack Like an AI.[/dim]\n", justify="center")
 
 def show_main_menu():
     """Display the main interactive menu."""
