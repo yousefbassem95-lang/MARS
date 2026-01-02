@@ -17,45 +17,45 @@ from rich.markdown import Markdown
 console = Console()
 
 ICON = """
-              #####                    ****                     #####   
-              #######                 ******                   ######             
-          ####   ##########           ******             ##########  ###          
-         #####           #######       ****        ########         #####        
-         #####                #####             #####               #####        
-           #####################  #   #####     # ######################         
-                              ###   #########   ###                            
-                       #######    ############      ######                       
-                     ##########   #############    #########                     
-                   ###########    #############    ###########                   
-                 ######       ##  ############# ##         ######                 
-               #####        #####  ###########  ####         #####               
-             ****#        *******#  #########   #******         #****             
-           ****         **+++***     ######      ***+++***        ****           
-         ***          *++++*+  ***  *+++++++*  *** ++++++**          ***         
-       **           *+++++    *+++  ++++++++   +++*    ++++++*          **       
-                  +++++       +=+    +=====+    +=+      +++++*                  
-                ++++         +=+     +=====+     +=+        ++++*                
-              ++==          +=+      +=====+      +=+          ==++              
-            ++=            ===       =----=        ===            ==+            
-                           ==        =----=         ==              =++         
-                          ==         =----=          ==                          
-                         ==          =-::-=           ==                         
-                         =            =::=             =                         
-                        =             =::=              =                        
-                       -              =..=               -                       
-                      :               :.:                 :                       
-                                      :::                                       
-                                      :::                                        
-                                      ---                                        
-                                      |||
+               #####                    ****                     #####
+               #######                 ******                   ######
+           ####   ##########           ******             ##########  ###
+          #####           #######       ****        ########         #####
+          #####                #####             #####               #####
+            #####################  #   #####     # ######################
+                               ###   #########   ###
+                        #######    ############      ######
+                      ##########   #############    #########
+                    ###########    #############    ###########
+                  ######       ##  ############# ##         ######
+                #####        #####  ###########  ####         #####
+              ****#        *******#  #########   #******         #****
+            ****         **+++***     ######      ***+++***        ****
+          ***          *++++*+  ***  *+++++++*  *** ++++++**          ***
+        **           *+++++    *+++  ++++++++   +++*    ++++++*          **
+                   +++++       +=+    +=====+    +=+      +++++*
+                 ++++         +=+     +=====+     +=+        ++++*
+               ++==          +=+      +=====+      +=+          ==++
+             ++=            ===       =----=        ===            ==+
+                            ==        =----=         ==              =++
+                           ==         =----=          ==
+                          ==          =-::-=           ==
+                          =            =::=             =
+                         =             =::=              =
+                        -              =..=               -
+                       :               :.:                 :
+                                       :::
+                                       :::
+                                       ---
+                                       |||
 
-       .   .
-     .'     '.
-    /   o     \\
-   |     o     |
-    \\    _    /
-     '.     .'
-       '...'
+        .   .
+      .'     '.
+     /   o     \\
+    |     o     |
+     \\    _    /
+      '.     .'
+        '...'
 """
 
 BANNER = """
@@ -65,6 +65,12 @@ BANNER = """
 ██║╚██╔╝██║██╔══██║██╔══██╗╚════██║
 ██║ ╚═╝ ██║██║  ██║██║  ██║███████║
 ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝
+"""
+
+FIGURE = """
+      o
+     /|\\
+     / \\
 """
 
 def show_legal_warning():
@@ -96,7 +102,8 @@ Type 'I AGREE' to continue (or 'exit' to quit):
 def display_banner():
     """Display MARS banner."""
     # Mars Red Theme: #FF4500 (OrangeRed) to #8B0000 (DarkRed)
-    console.print(f"[bold #FF4500]{ICON}[/bold #FF4500]", justify="center")
+    console.print(f"[bold #FF4500]{ICON}[/bold #FF4500]")
+    console.print(f"[bold white]{FIGURE}[/bold white]", justify="center")
     console.print(f"[bold #8B0000]{BANNER}[/bold #8B0000]", justify="center")
     console.print("\n[bold white on #8B0000] AI-POWERED RED TEAM AUTOMATION [/bold white on #8B0000]", justify="center")
     console.print("\n[bold white]made by J0J0M0J0[/bold white]", justify="center")
@@ -127,6 +134,15 @@ def show_main_menu():
 
 [cyan][7][/cyan] ⚙️  [white]Settings[/white]
     └── Configure AI models and preferences
+
+[bold red][8][/bold red] 🔥 [white]Network Stress Test (DoS)[/white]
+    └── Traffic bombardment simulator
+
+[bold red][9][/bold red] 🔓 [white]Brute Force Attack[/white]
+    └── Multi-service credential cracker
+
+[bold red on black][66][/bold red on black] ☢️  [red]ORBITAL STRIKE[/red]
+    └── ALL-IN-ONE DESTRUCTION MODE
 
 [bold red][99][/bold red] 💥 [white]Self-Destruct[/white]
     └── Emergency cleanup and exit
@@ -274,6 +290,67 @@ def mitre_mode():
         for phase in results:
             console.print(f"  {phase}")
 
+def stress_test_mode():
+    """Network stress testing (DoS Simulator)."""
+    from modules.exploit.stress_test import StressTester
+    
+    console.print("\n[bold red]🔥 Network Stress Tester (DoS)[/bold red]\n")
+    console.print("[yellow]⚠️  Warning: This generates high traffic volumes.[/yellow]\n")
+    
+    target = Prompt.ask("[cyan]Enter target IP[/cyan]")
+    port = Prompt.ask("[cyan]Enter target port[/cyan]", default="80")
+    
+    mode = Prompt.ask("[cyan]Select mode[/cyan]", choices=["TCP", "UDP", "HTTP"], default="TCP")
+    threads = int(Prompt.ask("[cyan]Number of threads[/cyan]", default="10"))
+    
+    if Confirm.ask(f"[bold red]Ready to bombard {target}:{port}?[/bold red]"):
+        stress = StressTester()
+        stress.start(target, port, mode, threads)
+
+def brute_force_mode():
+    """Multi-service brute force attacker."""
+    from modules.exploit.brute_force import BruteForcer
+    
+    console.print("\n[bold red]🔓 Multi-Service Brute Forcer[/bold red]\n")
+    
+    target = Prompt.ask("[cyan]Enter target IP[/cyan]")
+    service = Prompt.ask("[cyan]Select service[/cyan]", choices=["SSH", "FTP", "Telnet"], default="SSH")
+    
+    console.print("[dim]Using built-in wordlists...[/dim]")
+    
+    attacker = BruteForcer()
+    attacker.start(target, service)
+
+def orbital_strike_mode():
+    """All-out aggressive attack simulation."""
+    console.print("\n[bold red on black] ☢️  INITIATING ORBITAL STRIKE PROTOCOL ☢️  [/bold red on black]")
+    console.print("[bold red]This will launch ALL modules against the target sequentially.[/bold red]\n")
+    
+    target = Prompt.ask("[bold red]Enter Target IP for Destruction[/bold red]")
+    
+    if not Confirm.ask("[bold red]ARE YOU ABSOLUTELY SURE?[/bold red]"):
+        return
+
+    # 1. Recon
+    console.print("\n[bold yellow]--- PHASE 1: ORBITAL RECONNAISSANCE ---[/bold yellow]")
+    from modules.osint.ai_recon import AIRecon
+    recon = AIRecon()
+    recon.analyze(target)
+    
+    # 2. Vuln Scan
+    console.print("\n[bold yellow]--- PHASE 2: SECTOR SCANNING ---[/bold yellow]")
+    from modules.osint.vuln_scanner import VulnScanner
+    scanner = VulnScanner()
+    scanner.scan(target)
+    
+    # 3. Stress Test
+    console.print("\n[bold yellow]--- PHASE 3: KINETIC BOMBARDMENT (DoS) ---[/bold yellow]")
+    from modules.exploit.stress_test import StressTester
+    stress = StressTester()
+    stress.start(target, 80, "TCP", threads=20, duration=10)
+    
+    console.print("\n[bold red on black] 🏁 ORBITAL STRIKE COMPLETE. TARGET NEUTRALIZED. 🏁 [/bold red on black]\n")
+
 def report_mode():
     """Generate AI-written penetration test report."""
     from modules.reporting.ai_report import AIReportGenerator
@@ -400,7 +477,7 @@ def main():
         while True:
             show_main_menu()
             
-            choice = Prompt.ask("[cyan]Select option[/cyan]", choices=["0", "1", "2", "3", "4", "5", "6", "7", "99"])
+            choice = Prompt.ask("[cyan]Select option[/cyan]", choices=["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "66", "99"])
             
             if choice == "0":
                 console.print("\n[red]Goodbye! Stay ethical. 🔴[/red]\n")
@@ -419,6 +496,12 @@ def main():
                 report_mode()
             elif choice == "7":
                 settings_mode()
+            elif choice == "8":
+                stress_test_mode()
+            elif choice == "9":
+                brute_force_mode()
+            elif choice == "66":
+                orbital_strike_mode()
             elif choice == "99":
                 if Confirm.ask("[bold red]ARE YOU SURE? This will delete all logs and config![/bold red]"):
                     shield.emergency_cleanup()
@@ -430,4 +513,7 @@ def main():
         console.print(f"\n[bold red]💥 CRITICAL ERROR: {str(e)}[/bold red]")
         console.print("[dim]MARS has encountered an anomaly but remains operational.[/dim]")
         # Log error to encrypted log (simulated)
+
+if __name__ == "__main__":
+    main()
 

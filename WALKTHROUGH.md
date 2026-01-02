@@ -65,37 +65,37 @@ python3 mars.py --mode report --format html
 ### 1. Startup Banner
 
 ```
-              #####                    ****                     #####   
-              #######                 ******                   ######             
-          ####   ##########           ******             ##########  ###          
-         #####           #######       ****        ########         #####        
-         #####                #####             #####               #####        
-           #####################  #   #####     # ######################         
-                              ###   #########   ###                            
-                       #######    ############      ######                       
-                     ##########   #############    #########                     
-                   ###########    #############    ###########                   
-                 ######       ##  ############# ##         ######                 
-               #####        #####  ###########  ####         #####               
-             ****#        *******#  #########   #******         #****             
-           ****         **+++***     ######      ***+++***        ****           
-         ***          *++++*+  ***  *+++++++*  *** ++++++**          ***         
-       **           *+++++    *+++  ++++++++   +++*    ++++++*          **       
-                  +++++       +=+    +=====+    +=+      +++++*                  
-                ++++         +=+     +=====+     +=+        ++++*                
-              ++==          +=+      +=====+      +=+          ==++              
-            ++=            ===       =----=        ===            ==+            
-                           ==        =----=         ==              =++         
-                          ==         =----=          ==                          
-                         ==          =-::-=           ==                         
-                         =            =::=             =                         
-                        =             =::=              =                        
-                       -              =..=               -                       
-                      :               :.:                 :                       
-                                      :::                                       
-                                      :::                                        
-                                      ---                                        
-                                      |||
+      #####                    ****                     #####
+      #######                 ******                   ######
+  ####   ##########           ******             ##########  ###
+ #####           #######       ****        ########         #####
+ #####                #####             #####               #####
+   #####################  #   #####     # ######################
+                      ###   #########   ###
+               #######    ############      ######
+             ##########   #############    #########
+           ###########    #############    ###########
+         ######       ##  ############# ##         ######
+       #####        #####  ###########  ####         #####
+     ****#        *******#  #########   #******         #****
+   ****         **+++***     ######      ***+++***        ****
+ ***          *++++*+  ***  *+++++++*  *** ++++++**          ***
+**           *+++++    *+++  ++++++++   +++*    ++++++*          **
+          +++++       +=+    +=====+    +=+      +++++*
+        ++++         +=+     +=====+     +=+        ++++*
+      ++==          +=+      +=====+      +=+          ==++
+    ++=            ===       =----=        ===            ==+
+                   ==        =----=         ==              =++
+                  ==         =----=          ==
+                 ==          =-::-=           ==
+                 =            =::=             =
+                =             =::=              =
+               -              =..=               -
+              :               :.:                 :
+                              :::
+                              :::
+                              ---
+                              |||
 
        .   .
      .'     '.
@@ -105,13 +105,17 @@ python3 mars.py --mode report --format html
      '.     .'
        '...'
 
+      o
+     /|\\
+     / \\
+
 ███╗   ███╗ █████╗ ██████╗ ███████╗
 ████╗ ████║██╔══██╗██╔══██╗██╔════╝
 ██╔████╔██║███████║██████╔╝███████╗
 ██║╚██╔╝██║██╔══██║██╔══██╗╚════██║
 ██║ ╚═╝ ██║██║  ██║██║  ██║███████║
 ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝
-
+```
 made by J0J0M0J0
 Think Like a Hacker. Attack Like an AI.
 ```
@@ -353,47 +357,32 @@ Russian state-sponsored group focused on espionage
 ---
 
 ### 💬 AI Chat Mode
+[... content preserved ...]
 
-```
-Select option: 5
+---
 
-💬 MARS AI Chat Mode
-Type 'exit' to return to main menu
+## 🔥 Monster Mode (Aggressive)
 
-✓ Using AI Model: Demo Mode
+> [!WARNING]
+> These modes are **NOISY** and **AGGRESSIVE**. They can crash servers and lock accounts. Use only on systems you are authorized to stress test.
 
-You: How do I find SQL injection vulnerabilities?
+### 🔥 [8] Network Stress Test (DoS)
+Simulates high-traffic load to test system resilience.
+- **Modes**: TCP, UDP, HTTP Flood
+- **Usage**: Select target, port, and intensity (threads).
 
-🤖 MARS is thinking...
+### 🔓 [9] Brute Force Attack
+Multi-protocol credential cracking.
+- **Targets**: SSH, FTP, Telnet
+- **Method**: Dictionary attack using optimized wordlists.
 
-MARS: 💉 **SQL Injection Discovery Methodology**
-
-**1. Identify Entry Points**
-- Form inputs (login, search, registration)
-- URL parameters (?id=, ?page=, ?user=)
-- HTTP headers (User-Agent, Referer, Cookie)
-- API endpoints with JSON/XML data
-
-**2. Initial Testing**
-Test with basic payloads:
-- Single quote: '
-- Double quote: "
-- Comment: --
-- Boolean: ' OR '1'='1
-
-**3. Error Analysis**
-Look for database errors:
-- "SQL syntax error"
-- "mysql_fetch_array()"
-- "ORA-00933: SQL command not properly ended"
-
-**4. Automated Testing**
-```bash
-sqlmap -u "http://target.com/page?id=1" --dbs
-```
-
-Would you like me to generate specific payloads for your target?
-```
+### ☢️  [66] ORBITAL STRIKE
+**The Ultimate Weapon.**
+Automatically runs the entire red team chain in sequence:
+1.  **Reconnaissance** (Finds the target)
+2.  **Vulnerability Scan** (Finds the holes)
+3.  **Stress Test** (Smashes the gates)
+4.  **Report** (Logs the destruction)
 
 ---
 
