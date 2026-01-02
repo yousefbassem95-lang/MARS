@@ -109,12 +109,15 @@ MARS is part of the **MilkyWay Galaxy Project** - a constellation of advanced cy
 
 🔭 **Usage:** These tools are designed for authorized red teaming and educational research.
 
-| Planet | Tool Name | Function | Status |
+| Symbol | Tool Name | Function | Status |
 |:---:|:---:|:---|:---:|
 | ♂️ | **MARS** | AI Red Team Automation | 🟢 **Active** |
 | 🌑 | **LUNA** | Automated WiFi Cracking | 🟢 **Active** |
-| ☀️ | **SOL** | Smart Contract Auditing | 🟡 *In Dev* |
-| 🪐 | **JUPITER**| Network Storm Simulator | 🔴 *Classified* |
+| ☀️ | **RA** | Admin Control & Auditing | 🔴 **Classified** |
+| 🪐 | **JUPITER**| Admin Network Storm Sim | 🔴 **Classified** |
+| 🏹 | **ORION** | Advanced Hunter/Killer C2 | 🟡 *In Dev* |
+
+> ⚠️ **NOTICE:** **RA** and **JUPITER** are restricted **Admin Tools**. Access is strictly limited to higher clearance levels.
 
 👉 **[Explore the Galaxy on GitHub](https://github.com/yousefbassem95-lang?tab=repositories)**
 
